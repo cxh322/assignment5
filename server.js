@@ -230,7 +230,7 @@ app.get("/product", (req, res)=>{
   db.getMeals().then(meals=>{
       res.render("product", {data: meals, layout: false});
   }).catch(()=>{
-      res.send(" Error");
+      res.send("Error");
   })
 });
 
@@ -239,8 +239,7 @@ app.post("/addProduct", (req,res)=>{
   console.log("Adding prod with name: "+req.body.name);
   db.getMeals(req.body.name)
   .then((item)=>{
-      cart.addItem(item)
-      .then((numItems)=>{
+      cart.addItem(item).then((numItems)=>{
           res.json({data: numItems});
       }).catch(()=>{
           res.json({message:"error adding"});
