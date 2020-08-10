@@ -1,0 +1,64 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Add Meals</h2>
+            <hr />
+              <form method="post" action="/meals/add" enctype="multipart/form-data">
+              {{#if errorMsg}}
+
+                <div class="alert alert-danger alert-dismissible fade in" role="alert"> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Error:</strong> {{data.message}} 
+                </div>
+            {{/if}}
+            
+                <div class="form-group">
+              
+                <fieldset>
+                    <div class="col-md-6">
+                         <div class="form-group">
+                                        <label for="name">Meal Name:</label>
+                                        <input class="form-control" id="name" name="name" type="text" />
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label for="mealDescription">Meal Description:</label>
+                                        <input class="form-control" id="mealDescription" name="mealDescription" type="text" />
+                                    </div>
+                                
+
+                                    <div class="form-group">
+                                        <label for="price">Meal Price:</label>
+                                        <input class="form-control" id="price" name="price" type="text"  />
+                                    </div>
+                              
+                            </div>
+                        </fieldset>
+
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="tpSale">TopSale:</label>
+                                    <input class="form-control" type="checkbox" name="topSale" />
+                                </div>
+                            </div>
+                            </div>
+                    </fieldset>
+                      <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="photo">Img File:</label>
+                                    <input id="photo" type="file" name="photo"/><br />
+                                </div>
+                            </div>
+                        </div>
+                    <input type="submit" class="btn btn-primary pull-left" value="Add Meal" /><br /><br /><br />
+            </form>
+        </div>
+
+    </div>
+</div>

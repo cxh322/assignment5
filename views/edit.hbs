@@ -1,0 +1,21 @@
+
+<div class="container">
+    <div class="row" style="text-align: center;">
+            <div class="col-md-12" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?cs=srgb&dl=flat-lay-photography-of-vegetable-salad-on-plate-1640777.jpg&fm=jpg');"><span class="text" style="background-color:rgb(119, 136, 153,0.7); font-size:xx-large;  border-radius: 10px;">&nbsp;You're looking hungry!&nbsp;</span></br>
+            </div>
+    </div>
+    </br>
+    <div class="row" style="text-align: center; background-color:#05386b;"><h3 class="text">Our Meal Packages</h3>
+{{#each meals}}
+        <div class="text col-md-3" style="text-align: center;">
+            <div class="row">
+           <img src="/photos/{{img}} " class="img-responsive img-thumbnail" />
+           <h4>{{name}}</h4> 
+             <h4>{{mealDescription}}</h4>
+</div>
+    </div>
+    {{/each}}
+    </div>
+</div>
+
+{{>footer}}

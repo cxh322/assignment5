@@ -1,0 +1,28 @@
+<div class="container">
+        {{#each meals}}
+        <div class="row">
+            <div class="col-md-2">
+                <img class="img-fluid" src="/photos/{{img}}" alt="Image for {{name}}"> 
+            </div>
+            <div class="col-md-2">Name: {{name}}</div>
+            <div class="col-md-2">Meal Price: ${{price}}</div>
+            <div class="col-md-2">Meal Description: {{mealDescription}}</div>
+            {{#if topSale}}
+                <div class="col-md-2">topSale</div>
+            {{else}}
+                <div class="col-md-2">not topSale</div>
+            {{/if}}
+            <div class=" col-md-1">
+                <a href="/edit?price={{price}}" class="btn btn-primary">Edit</a>
+            </div>
+            <div class=" col-md-1">
+                <a href="/delete?price={{price}}" class="btn btn-primary">Delete</a>
+            </div>
+        </div>
+        </br>
+        {{else}}
+            <h4>No Meals were found</h4>
+        {{/each}}
+    {{!-- {{/if}} --}}
+</div>
+

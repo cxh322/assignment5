@@ -1,0 +1,38 @@
+<div class="container">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="regiModal">Registration</h3>
+            </div>
+            {{#if data.message}}
+                <div class="alert alert-danger alert-dismissible fade in" role="alert"> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Error:</strong> {{data.message}} 
+                </div>
+            {{/if}}
+            <form id="regiForm" action="/register" method="POST">
+            
+                <div class="form-group">
+                    <input type="text" class="form-control" id="fname" name="fname" value="{{data.fname}}" placeholder="First Name">  
+                </div>
+                <div class="form-group">
+                        <input type="text" class="form-control" id="lname" name="lname" value="{{data.lname}}" placeholder="Last Name">
+             </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" name="email" value="{{data.email}}" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" value="{{data.password}}" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password1" name="password1" value="{{data.password1}}" placeholder="Confirm Password">
+                </div>
+                 <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+                
+        </div>
+    </div>
+</div>
+</div>
+{{>footer}}

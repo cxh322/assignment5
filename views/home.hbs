@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row" style="text-align: center;">
+        <div class="col-md-12" style="background-image: url(photos/header.jpg);"><span class="text" style="background-color:rgb(119, 136, 153,0.7); font-size:xx-large;  border-radius: 10px;">&nbsp;You'll like what we have cooking!&nbsp;</span></br>
+
+       <a href="/product" class="btn btn-primary">&nbsp;&nbsp;All Meal Packages</a>  
+        </div>
+    </div>
+    </br>
+    <div class="text row" style="background-color:#05386b; text-align: center;" >
+        <h3>Our mantra</h3>
+        
+        <div class="text col-md-3"><i class="fa fa-hand-pointer-o fa-5x" aria-hidden="true"></i></br>Choose</div>
+        <div class="text col-md-3"><i class="fa fa-fire fa-5x" aria-hidden="true"></i></br>Heat</div>
+        <div class="text col-md-3"><i class="fa fa-cutlery fa-5x" aria-hidden="true"></i></br>Consume</div>
+        <div class="text col-md-3"><i class="fa fa-repeat fa-5x" aria-hidden="true"></i></br>Repeat</div>
+    </div>
+    </br>
+
+    <div class="row" style="text-align: center; background-color:#05386b;"><h3 class="text">Our Meals</h3>
+{{#each meals}}
+        <div class="text col-md-3" style="text-align: center; text-color: ">
+         <a href="/product"> <img src="/photos/{{img}} " class="img-responsive img-thumbnail" /> </a>
+          {{#if topSale}} 
+          <h4 style="color:#FF0000">TopSale</h4>        
+            <h4>{{name}}</h4> 
+            <h4>${{price}}</h4>
+            <h4>{{mealDescription}}</h4>  
+            {{else}}
+             <h4>{{name}}</h4> 
+            <h4>${{price}}</h4>
+            <h4>{{mealDescription}}</h4> 
+            {{/if}}
+
+        </div>
+   {{/each}}
+    </div>
+  
+</div>
+
+</br>
+{{>footer}}

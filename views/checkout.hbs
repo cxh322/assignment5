@@ -1,0 +1,164 @@
+<html lang="en">
+ <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <!-- Latest compiled and minified Bootstrap 3.3.7 CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   
+      {{!-- TODO: If you have any styles you want to apply you can use this path below --}}
+      <link rel="stylesheet" href="/css/style.css" type="text/css" />
+      <script src="https://use.fontawesome.com/95db7d92a6.js"></script>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+            <a class="navbar-brand" href="/"><img src="https://img.icons8.com/color/48/000000/kawaii-taco.png" alt="taco" class="img-fluid"></a>
+            <a class="text navbar-brand" href="/">Happy Food</a>
+        </div>
+  
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            {{#navLink "/"}}Home{{/navLink}}
+            {{#navLink "/product"}}Products{{/navLink}}
+            
+          </ul>
+         {{#if session.user}}
+          <form class="navbar-form navbar-right">
+           <a href="/meals/add" class="btn btn-primary"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;AddMeal</a>
+           <a href="/meals" class="btn btn-primary"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;EditMeal</a>
+          <a href="/logout" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;&nbsp;LogOut</a>
+           </form> 
+            {{/if}}
+          {{#unless session.user}}
+           <form class="navbar-form navbar-right">
+            <a href="/register" class="btn btn-primary"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Register</a>
+            <a href="/login" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;&nbsp;Log In</a>  
+          </form> 
+          {{/unless}}   
+              
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+        <!-- it is common to place the .js files at the end of the <body> tag as well -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+       <script>
+            function makeAJAXRequest(method, url, data){
+                if(data){ // Make an AJAX call using the provided data & method
+                    console.log("Adding: "+data.name);
+                    fetch(url, { 
+                        method: method,
+                        body: JSON.stringify(data),
+                        headers: { 'Content-Type': 'application/json'} 
+                    })
+                    .then(response => response.json())
+                    .then(json => {//responds with number of items in cart
+                        $(".total").text(`Total: ${json.data.total}`);
+                        $("#list").empty();//emptys old container
+                        var htmlStr =""; //creates a empty html string to add to list div
+                        
+                        //Populates HTML string. This prints each item to screen. 
+                        (json.data.cart).forEach(x=>{ 
+                            htmlStr += '<div class="row">';
+                            htmlStr += '<div class="col-md-3">';
+                            htmlStr += '<img class="img-fluid" src="/photos/'+x.img+'" alt="'+x.name+'">';
+                            htmlStr += '</div><div class="col-md-3">';
+                            htmlStr += '<h3>'+x.name+'</h3></div>';
+                            htmlStr += '<div class="col-md-3">';
+                            htmlStr += ' <h4>$'+x.price+'</h4>';
+                            htmlStr += '</div><div class="col-md-3">';
+                            htmlStr += `<button  type="button" onclick='removeFromCart("${x.name}")'>Remove from Cart</button>`;
+                            htmlStr += '</div></div><hr>';   
+                        });
+
+                        //sets the HTML inside "list" div
+                        $("#list").html(htmlStr);
+                    }).catch((err)=>{
+                        console.log("Error Fetching");
+                        alert(err.message);
+                    }); 
+
+                }else{  // Make an AJAX call without providing data using the method
+                    fetch(url, { method: method })
+                    .then(response => response.json())
+                    .then(json => {
+                        console.log(json);   
+                    }).catch((message)=>{
+                        alert(message);
+                    });
+                }
+            }
+            //makes ajax call to remove a certain item by name
+            function removeFromCart(data){
+                console.log("Calling add with: "+data);
+                 makeAJAXRequest("POST", "/removeItem", {name: data});
+            }
+        </script> 
+       
+       
+       
+       <style >
+           img {
+                border-radius: 25px;
+                width: 100%;
+            }
+        </style>
+  
+    <body>
+        <div class="container">
+            <div class="row"><h1>My Cart</h1></div>
+            <div class="row">
+            <div class="col-md-3">
+                <h2>Image</h2>
+            </div>
+            <div class="col-md-3">
+               <h2>Product</h2>
+            </div>
+            <div class="col-md-3">
+                <h2>Price</h2>
+            </div>
+            <div class="col-md-3">
+                <h2 class="total" style="color: red;">Total: {{data.total}}</h2>
+            </div>
+
+        </div>
+        <hr>
+        <div id="list">
+        {{#each data.cart}}
+            <div class="row">
+                <div class="col-md-3">
+                    <img class="img-fluid" src="/photos/{{img}}" alt="{{name}}">
+                </div>
+                <div class="col-md-3">
+                    <h3>{{name}}</h3>
+                </div>
+                <div class="col-md-3">
+                    <h4>${{price}}</h4>
+                </div>
+                <div class="col-md-3">
+                    <!--Add a button to call our ajax functions-->
+                    <button  type="button" onclick='removeFromCart("{{name}}")'>Remove from Cart</button>
+                </div>
+            </div>
+        <hr>
+        {{else}}
+            <div class="row">
+                <div><h3>Cart is Empty</h3></div>
+            </div>
+        {{/each}}
+        </div>
+        <hr>
+        
+        </div>
+    </body>
+</html>
+{{>footer}}

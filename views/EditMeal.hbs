@@ -1,0 +1,61 @@
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <h2>Edit Meal</h2>
+            <hr />
+
+            <form method="post" action="/meals/edit">
+                <fieldset>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Meal Name:</label>
+                                        <input class="form-control" id="name" name="name" value="{{name}}" type="text" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="price">Meal price:</label>
+                                        <input class="form-control" id="price" name="price" value="{{price}}" type="text" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="mealDescription">Meal Description:</label>
+                                        <input class="form-control" id="mealDescription" name="mealDescription" value="{{mealDescription}}" type="text"  />
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="topSale">topSale:</label>
+                                    {{#if topSale}}
+                                    <input class="form-control" type="checkbox"  name="topSale" checked/>
+                                    {{else}}
+                                    <input class="form-control" type="checkbox"  name="topSale"/>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    
+                    <hr />
+     
+                    <input type="submit" class="btn btn-primary pull-right" value="Edit Meal" /><br /><br /><br />
+
+            </form>
+        </div>
+    </div>
+
+</div>
